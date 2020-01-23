@@ -1,0 +1,12 @@
+[submodule "Kalamar"]
+	path = Kalamar
+	url = https://github.com/KorAP/Kalamar.git
+[submodule "Krill"]
+	path = Krill
+	url = https://github.com/KorAP/Krill.git
+[submodule "Koral"]
+	path = Koral
+	url = https://github.com/KorAP/Koral.git
+[submodule "Kustvakt"]
+	path = Kustvakt
+	url = https://github.com/KorAP/Kustvakt.git
