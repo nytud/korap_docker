@@ -26,3 +26,13 @@ stop:
 		echo 'no running $(MYNAME) container' ; \
 	fi
 .PHONY: stop
+
+rm:
+	@ make -s stop
+	@if [ "$$(docker container ls --all -f name=$(MYNAME) -q)" ] ; then \
+		docker container rm $(MYNAME) ; \
+	else \
+		echo 'no $(MYNAME) container' ; \
+	fi
+.PHONY: drm
+

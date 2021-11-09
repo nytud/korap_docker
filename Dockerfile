@@ -72,17 +72,13 @@ RUN sed -e 's#^krill\.indexDir\s*=\s*.*$#krill.indexDir=/app/index/#gm' \
     /app/Kustvakt/lite/src/main/resources/kustvakt-lite.conf \
     > /app/Kustvakt/lite/target/kustvakt-lite.conf 
 
-RUN cd Kalamar ; \
-    echo -e "hypnotoad => {\n\
-    listen => ['http://*:5555'],\n\
-    workers => 5,\n\
-    inactivity_timeout => 120,\n\
-    proxy => 1\n}" >kalamar.hnc.conf; \
-    echo "$(tr -cd '[:alnum:]' < /dev/urandom | head -c${1:-32})" > kalamar.secret
+RUN echo "$(tr -cd '[:alnum:]' < /dev/urandom | head -c${1:-32})" > Kalamar/kalamar.secret
 
 RUN sed -r 's#^  },\s*$#  },\n  hypnotoad => {\n    listen => ['\''http://*:5555'\''],\n    workers => 5,\n    inactivity_timeout => 120,\n    proxy => 1\n  },#g' \
     Kalamar/kalamar.conf \
-    >Kalamar/kalamar.hnc.conf
+    >Kalamar/kalamar.hnc.conf \
+    ; sed -ir 's/# experimental_proxy => 1,/experimental_proxy => 1,/' Kalamar/kalamar.hnc.conf \
+    ;
 
 
 COPY entrypoint.sh /app
