@@ -20,4 +20,4 @@ MOJO_MODE=hnc KALAMAR_API='http://localhost:5556/api/' hypnotoad script/kalamar
 
 # backend
 cd /app/Kustvakt/lite/target/
-java -jar Kustvakt-lite-0.62.2.jar
+java -jar Kustvakt-lite-*.jar

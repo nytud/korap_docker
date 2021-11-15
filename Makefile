@@ -1,6 +1,6 @@
 MYNAME = korap
 HOSTPORT = 10005
-CONTPORT = 5555
+CONTPORT = 8080
 DOCKERRUN = docker run --name $(MYNAME) -p $(HOSTPORT):$(CONTPORT) -v $$(pwd)/index/:/app/index/
 
 build:
