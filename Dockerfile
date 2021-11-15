@@ -1,8 +1,10 @@
-FROM ubuntu:16.04
+FROM ubuntu:20.04
 
 SHELL ["/bin/bash", "-c"]
 
 RUN apt-get update && apt-get dist-upgrade -y
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get install -y \
     apt-utils \
@@ -13,7 +15,7 @@ RUN apt-get install -y \
     git \
     libxml2-dev \
     maven \
-    openjdk-8-jdk \
+    openjdk-8-jre \
     perlbrew \
     ruby \
     ;
@@ -23,8 +25,8 @@ RUN apt-get autoremove -y && apt-get autoclean
 RUN perlbrew init \
     ; echo 'source ~/perl5/perlbrew/etc/bashrc' >>~/.bashrc \
     ; source ~/perl5/perlbrew/etc/bashrc \
-    ; perlbrew install --noman --thread perl-5.30.1 \
-    ; perlbrew switch perl-5.30.1 \
+    ; perlbrew install --noman --thread perl-5.34.0 \
+    ; perlbrew switch perl-5.34.0 \
     ; perlbrew install-cpanm \
     ;
 
@@ -48,7 +50,7 @@ RUN cd /app/Koral ; mvn clean install
 
 # Krill
 COPY Krill /app/Krill
-RUN cd /app/Krill ; mvn clean install
+RUN cd /app/Krill ; mvn install
 
 # Kustvakt
 COPY Kustvakt /app/Kustvakt
